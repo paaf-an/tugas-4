@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirigine Interior</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+  <link rel ="stylesheet" href="style.css">
+
+  
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+
+    <a class="navbar-brand" onclick="showPage('home')" style="cursor:pointer">Mirigine</a>
+
+    <div class="d-flex align-items-center gap-2 ms-auto d-lg-none">
+      <button class="cart-btn" onclick="openCart()" title="Cart">
+        <i class="bi bi-bag"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+      <button class="navbar-toggler border-0" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link active" id="nav-home"    onclick="showPage('home')">Home</a></li>
+        <li class="nav-item"><a class="nav-link"        id="nav-products" onclick="showPage('products')">Products</a></li>
+        <li class="nav-item"><a class="nav-link"        id="nav-about"   onclick="showPage('about')">About</a></li>
+        <li class="nav-item"><a class="nav-link"        id="nav-contact" onclick="showPage('contact')">Contact</a></li>
+      </ul>
+
+      <div class="d-flex gap-2 align-items-center flex-column flex-lg-row mt-3 mt-lg-0" style="position:relative">
+        <input type="text" class="search-box" id="searchInput" placeholder="Search furniture..." oninput="handleSearch(this.value)" onblur="hideSearch()">
+        <div class="search-results" id="searchResults"></div>
+        <button class="cart-btn d-none d-lg-flex" onclick="openCart()" title="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" id="cartBadgeDesktop">0</span>
+        </button>
+        <button class="btn-custom" onclick="showPage('products')">Explore</button>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- PAGE: HOME  -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero" style="padding:0">
+    <div class="hero-content">
+      <h1>Modern Interior <br>For Better Living</h1>
+      <p>Beautiful furniture and aesthetic spaces with warm minimalist luxury vibes.</p>
+      <div class="d-flex gap-3 flex-wrap">
+        <button class="btn-custom" onclick="showPage('products')">Shop Now</button>
+        <button class="btn btn-light rounded-pill px-4" onclick="showPage('about')">Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SHOWCASE -->
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Featured Collection</h2>
+        <p>Minimalist furniture with warm modern vibes.</p>
+      </div>
+
+      <!-- CATEGORY FILTER -->
+      <div class="text-center mb-5">
+        <button class="category-btn active" onclick="filterCategory(this,'All')">All</button>
+        <button class="category-btn" onclick="filterCategory(this,'Sofa')">Sofa</button>
+        <button class="category-btn" onclick="filterCategory(this,'Chair')">Chair</button>
+        <button class="category-btn" onclick="filterCategory(this,'Lamp')">Lamp</button>
+        <button class="category-btn" onclick="filterCategory(this,'Decor')">Decor</button>
+      </div>
+
+      <div class="editorial-layout">
+        <!-- LEFT -->
+        <div class="editorial-text">
+          <small>FEATURED</small>
+          <h2>Chenietue-<br>Miley+Bismoly</h2>
+          <p>The perfect elegance furniture for modern interiors with minimalist luxury atmosphere.</p>
+
+          <div class="mini-showcase">
+            <div class="mini-image">
+              <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop" alt="Luxury Bedroom">
+            </div>
+            <div class="mini-content">
+              <h5>Luxury Bedroom</h5>
+              <p>Modern wooden bed with premium minimalist atmosphere.</p>
+              <button class="btn btn-dark rounded-pill px-4 py-2" onclick="showPage('products')">Explore Bedroom</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT GRID -->
+        <div class="editorial-grid">
+          <div class="product-card tall" data-category="Chair" data-bs-toggle="modal" data-bs-target="#modal1">
+            <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1200&auto=format&fit=crop" alt="Luxury Chair">
+            <div class="card-body"><h4>Luxury Chair</h4><p>Minimalist wooden chair.</p></div>
+          </div>
+          <div class="product-card tall" data-category="Lamp" data-bs-toggle="modal" data-bs-target="#modal2">
+            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop" alt="Modern Lamp">
+            <div class="card-body"><h4>Modern Lamp</h4><p>Warm lighting aesthetic.</p></div>
+          </div>
+          <div class="product-card wide" data-category="Decor" data-bs-toggle="modal" data-bs-target="#modal3">
+            <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop" alt="Luxury Interior">
+            <div class="card-body"><h4>Luxury Interior</h4><p>Elegant premium living room.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section style="padding-top:0">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="bi bi-truck"></i>
+            <h4>Fast Delivery</h4>
+            <p>Quick shipping with safe packaging guaranteed to your door.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="bi bi-shield-check"></i>
+            <h4>Best Quality</h4>
+            <p>Premium material and durable design with 5-year warranty.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="bi bi-stars"></i>
+            <h4>Modern Style</h4>
+            <p>Luxury minimalist trends updated every season.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section style="padding-top:0">
+    <div class="container">
+      <div class="newsletter">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <h2>Subscribe Our Newsletter</h2>
+            <p style="color:#aaa;margin-top:10px">Get updates for new collections and exclusive discounts.</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="d-flex flex-column flex-md-row gap-3">
+              <input type="email" id="newsletterEmail" class="form-control" placeholder="Enter your email" style="border-radius:30px;height:50px;border:none;padding:0 20px;font-family:'Poppins',sans-serif">
+              <button class="btn-custom" onclick="subscribeNewsletter()" style="height:50px;padding:0 28px">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-home -->
+
+
+<!-- PRODUCTS-->
+<div id="page-products" class="page">
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <small style="letter-spacing:4px;color:#999;font-size:13px">OUR COLLECTION</small>
+        <h2 class="mt-2">All Products</h2>
+        <p style="color:#888">Discover our full range of minimalist luxury furniture.</p>
+      </div>
+
+      <div class="text-center mb-5">
+        <button class="category-btn active" onclick="filterProducts(this,'All')">All</button>
+        <button class="category-btn" onclick="filterProducts(this,'Sofa')">Sofa</button>
+        <button class="category-btn" onclick="filterProducts(this,'Chair')">Chair</button>
+        <button class="category-btn" onclick="filterProducts(this,'Lamp')">Lamp</button>
+        <button class="category-btn" onclick="filterProducts(this,'Table')">Table</button>
+        <button class="category-btn" onclick="filterProducts(this,'Decor')">Decor</button>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- injected by JS -->
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!--  ABOUT -->
+<div id="page-about" class="page">
+  <div class="about-hero">
+    <div>
+      <p style="letter-spacing:5px;font-size:13px;opacity:.8;margin-bottom:12px">OUR STORY</p>
+      <h1>About Mirigine</h1>
+      <p style="margin-top:16px;opacity:.85;max-width:500px;margin-left:auto;margin-right:auto">
+        Crafting beautiful spaces since 2018 — where luxury meets minimalism.
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="row align-items-center g-5 mb-5">
+        <div class="col-lg-6">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=800&auto=format&fit=crop"
+               style="width:100%;border-radius:35px;box-shadow:0 20px 50px rgba(0,0,0,.1)" alt="Showroom">
+        </div>
+        <div class="col-lg-6">
+          <small style="letter-spacing:4px;color:#999;font-size:13px">WHO WE ARE</small>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:3rem;margin:15px 0">
+            Design With<br>Purpose & Soul
+          </h2>
+          <p style="color:#666;line-height:1.9">
+            Mirigine was born from a simple belief: your home should feel like a sanctuary. 
+            We curate furniture that balances form and function — timeless pieces crafted 
+            from premium materials that bring warmth and elegance to every room.
+          </p>
+          <p style="color:#666;line-height:1.9;margin-top:15px">
+            Every item in our collection is carefully selected to ensure the highest 
+            standards of quality, sustainability, and aesthetic coherence.
+          </p>
+          <div class="d-flex gap-4 mt-4">
+            <div><h3 style="color:#d89c4a;font-weight:700">500+</h3><p style="color:#888;font-size:14px">Products</p></div>
+            <div><h3 style="color:#d89c4a;font-weight:700">12K+</h3><p style="color:#888;font-size:14px">Customers</p></div>
+            <div><h3 style="color:#d89c4a;font-weight:700">8</h3><p style="color:#888;font-size:14px">Years</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VALUES -->
+      <div class="row g-4 mt-2">
+        <div class="col-12">
+          <div class="section-title text-center" style="margin-bottom:40px">
+            <h2>Our Values</h2>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="bi bi-leaf"></i>
+            <h4>Sustainability</h4>
+            <p>Responsibly sourced materials and eco-friendly production processes.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="bi bi-gem"></i>
+            <h4>Craftsmanship</h4>
+            <p>Every piece is handcrafted by skilled artisans with decades of experience.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="bi bi-heart"></i>
+            <h4>Customer Love</h4>
+            <p>Your satisfaction is our priority — dedicated support every step of the way.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEAM -->
+      <div class="mt-5 pt-3">
+        <h2 class="text-center mb-5" style="font-size:2.5rem;font-weight:700">Meet The Team</h2>
+        <div class="row g-4">
+          <div class="col-6 col-md-3">
+            <div class="team-card">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop" alt="CEO">
+              <h5>Rizal M.</h5>
+              <p>CEO & Founder</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="team-card">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" alt="Designer">
+              <h5>Alya K.</h5>
+              <p>Lead Designer</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="team-card">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" alt="Ops">
+              <h5>Doni S.</h5>
+              <p>Operations</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="team-card">
+              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&auto=format&fit=crop" alt="Marketing">
+              <h5>Sari W.</h5>
+              <p>Marketing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!--  CONTACT -->
+<div id="page-contact" class="page">
+  <section>
+    <div class="container">
+      <div class="section-title text-center">
+        <small style="letter-spacing:4px;color:#999;font-size:13px">GET IN TOUCH</small>
+        <h2 class="mt-2">Contact Us</h2>
+        <p style="color:#888;max-width:500px;margin:0 auto">
+          Have a question or want to visit our showroom? We'd love to hear from you.
+        </p>
+      </div>
+
+      <div class="row g-5">
+        <!-- FORM -->
+        <div class="col-lg-7">
+          <div class="contact-card">
+            <h4 style="font-weight:700;margin-bottom:8px">Send a Message</h4>
+            <p style="color:#888;font-size:14px;margin-bottom:28px">We'll get back to you within 24 hours.</p>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <input type="text" id="contactName" class="form-control-custom" placeholder="Your Name">
+              </div>
+              <div class="col-sm-6">
+                <input type="email" id="contactEmail" class="form-control-custom" placeholder="Email Address">
+              </div>
+            </div>
+            <input type="text" id="contactSubject" class="form-control-custom" placeholder="Subject">
+            <textarea id="contactMessage" class="form-control-custom" placeholder="Your message..."></textarea>
+
+            <button class="btn-custom w-100" style="height:52px;font-size:15px" onclick="sendContactForm()">
+              <i class="bi bi-send me-2"></i>Send Message
+            </button>
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="col-lg-5">
+          <div class="contact-info-box h-100">
+            <h4 style="font-weight:700;margin-bottom:28px">Contact Information</h4>
+
+            <div class="contact-info-item">
+              <i class="bi bi-geo-alt-fill"></i>
+              <div>
+                <h6>Showroom</h6>
+                <p>Jl. Kemang Raya No. 88<br>Jakarta Selatan, 12730</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="bi bi-telephone-fill"></i>
+              <div>
+                <h6>Phone</h6>
+                <p>+62 21 7890 1234<br>+62 812 3456 7890</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="bi bi-envelope-fill"></i>
+              <div>
+                <h6>Email</h6>
+                <p>hello@mirigine.id<br>support@mirigine.id</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="bi bi-clock-fill"></i>
+              <div>
+                <h6>Opening Hours</h6>
+                <p>Mon – Fri: 09.00 – 18.00<br>Sat – Sun: 10.00 – 16.00</p>
+              </div>
+            </div>
+
+            <!-- SOCIALS -->
+            <div class="mt-4">
+              <h6 style="font-weight:600;margin-bottom:14px">Follow Us</h6>
+              <div class="d-flex gap-3">
+                <a class="d-flex align-items-center justify-content-center" style="width:42px;height:42px;border-radius:50%;background:#222;color:white;font-size:1.1rem;transition:.3s" onmouseover="this.style.background='#d89c4a'" onmouseout="this.style.background='#222'">
+                  <i class="bi bi-instagram"></i>
+                </a>
+                <a class="d-flex align-items-center justify-content-center" style="width:42px;height:42px;border-radius:50%;background:#222;color:white;font-size:1.1rem;transition:.3s" onmouseover="this.style.background='#d89c4a'" onmouseout="this.style.background='#222'">
+                  <i class="bi bi-facebook"></i>
+                </a>
+                <a class="d-flex align-items-center justify-content-center" style="width:42px;height:42px;border-radius:50%;background:#222;color:white;font-size:1.1rem;transition:.3s" onmouseover="this.style.background='#d89c4a'" onmouseout="this.style.background='#222'">
+                  <i class="bi bi-twitter-x"></i>
+                </a>
+                <a class="d-flex align-items-center justify-content-center" style="width:42px;height:42px;border-radius:50%;background:#222;color:white;font-size:1.1rem;transition:.3s" onmouseover="this.style.background='#d89c4a'" onmouseout="this.style.background='#222'">
+                  <i class="bi bi-pinterest"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAP PLACEHOLDER -->
+      <div style="margin-top:60px;border-radius:35px;overflow:hidden;height:300px;background:#e8e2d9;display:flex;align-items:center;justify-content:center">
+        <div class="text-center">
+          <i class="bi bi-map" style="font-size:3rem;color:#d89c4a;margin-bottom:12px;display:block"></i>
+          <p style="color:#888;font-size:14px">Jl. Kemang Raya No. 88, Jakarta Selatan</p>
+          <a href="https://maps.google.com" target="_blank" class="btn-custom mt-3" style="display:inline-block">
+            <i class="bi bi-box-arrow-up-right me-2"></i>Open in Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!--  FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <h3 class="mb-3">Mirigine</h3>
+        <p>Interior furniture store with aesthetic modern design. Built for luxury furniture lovers.</p>
+        <div class="social mt-4">
+          <i class="bi bi-instagram"></i>
+          <i class="bi bi-facebook"></i>
+          <i class="bi bi-twitter-x"></i>
+          <i class="bi bi-pinterest"></i>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h5>Company</h5>
+        <a onclick="showPage('about')">About</a>
+        <a onclick="showToast('Career page coming soon!')">Career</a>
+        <a onclick="showToast('Blog page coming soon!')">Blog</a>
+        <a onclick="showToast('Partnership page coming soon!')">Partnership</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h5>Support</h5>
+        <a onclick="showToast('Help Center coming soon!')">Help Center</a>
+        <a onclick="showToast('Safety page coming soon!')">Safety</a>
+        <a onclick="showToast('FAQ page coming soon!')">FAQ</a>
+        <a onclick="showPage('contact')">Contact</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h5>Product</h5>
+        <a onclick="showPage('products')">Chair</a>
+        <a onclick="showPage('products')">Lamp</a>
+        <a onclick="showPage('products')">Table</a>
+        <a onclick="showPage('products')">Sofa</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h5>Legal</h5>
+        <a onclick="showToast('Privacy Policy coming soon!')">Privacy</a>
+        <a onclick="showToast('Terms page coming soon!')">Terms</a>
+        <a onclick="showToast('License page coming soon!')">License</a>
+      </div>
+    </div>
+    <hr class="my-5 border-secondary">
+    <div class="text-center">
+      <p>© 2026 Mirigine Interior. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- MODALS -->
+<div class="modal fade" id="modal1" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <button type="button" class="btn-close position-absolute end-0 top-0 m-3 z-1" data-bs-dismiss="modal"></button>
+      <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1200&auto=format&fit=crop" alt="Luxury Chair">
+      <div class="p-4">
+        <h2>Luxury Chair</h2>
+        <p class="text-muted">Elegant minimalist chair with premium comfort and solid oak frame.</p>
+        <div class="modal-price">Rp 4.500.000</div>
+        <div class="d-flex gap-3 mt-3">
+          <button class="btn-custom flex-grow-1" onclick="addToCart('Luxury Chair','Rp 4.500.000')">
+            <i class="bi bi-bag-plus me-2"></i>Add To Cart
+          </button>
+          <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal2" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <button type="button" class="btn-close position-absolute end-0 top-0 m-3 z-1" data-bs-dismiss="modal"></button>
+      <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop" alt="Modern Lamp">
+      <div class="p-4">
+        <h2>Modern Lamp</h2>
+        <p class="text-muted">Warm aesthetic lamp with luxury minimalist vibes. E27 socket, dimmable.</p>
+        <div class="modal-price">Rp 1.200.000</div>
+        <div class="d-flex gap-3 mt-3">
+          <button class="btn-custom flex-grow-1" onclick="addToCart('Modern Lamp','Rp 1.200.000')">
+            <i class="bi bi-bag-plus me-2"></i>Add To Cart
+          </button>
+          <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal3" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <button type="button" class="btn-close position-absolute end-0 top-0 m-3 z-1" data-bs-dismiss="modal"></button>
+      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop" alt="Luxury Interior">
+      <div class="p-4">
+        <h2>Luxury Interior Package</h2>
+        <p class="text-muted">Complete elegant modern living room package for a premium lifestyle aesthetic.</p>
+        <div class="modal-price">Rp 28.000.000</div>
+        <div class="d-flex gap-3 mt-3">
+          <button class="btn-custom flex-grow-1" onclick="addToCart('Luxury Interior Package','Rp 28.000.000')">
+            <i class="bi bi-bag-plus me-2"></i>Add To Cart
+          </button>
+          <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cart Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:30px;padding:10px">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold"><i class="bi bi-bag me-2" style="color:#d89c4a"></i>Shopping Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="cartItems" style="min-height:120px">
+        <p class="text-center text-muted py-4">Your cart is empty.</p>
+      </div>
+      <div class="modal-footer border-0 d-flex justify-content-between align-items-center">
+        <strong id="cartTotal" style="font-size:1rem"></strong>
+        <button class="btn-custom" onclick="checkoutCart()">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-notif" id="toastNotif">
+  <i class="bi bi-check-circle-fill"></i>
+  <span id="toastMsg"></span>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
